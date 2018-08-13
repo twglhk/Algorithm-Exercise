@@ -1,56 +1,10 @@
 #include <iostream>
 #include <queue>
-#include <deque>
 
 using namespace std;
 
 int n, k;
-queue<int> result;
-vector<int> denominator;
-deque<int> numerator;
-
-int factorial()
-{
-	numerator.clear();
-	denominator.clear();
-
-	for (int i = 0; i < k; i++)
-	{
-		denominator.push_back(n--);
-		numerator.push_back(k-i);
-	}
-
-	while (!numerator.empty())
-	{
-		if (numerator.front() == 1)
-		{	
-			numerator.pop_front();
-		}
-
-		else
-		{
-			for (int i = denominator.size()-1; i >=0; i--)
-			{
-				if (denominator[i] % numerator.front() == 0)
-				{
-					denominator[i] /= numerator.front();
-					numerator.pop_front();
-					break;
-				}
-			}
-		}
-	}
-
-
-	int temp = 1;
-
-	for (int i = 0; i < denominator.size(); i++)
-		temp *= denominator[i];
-		
-	return temp;
-}
-
-
+queue<unsigned long long> result;
 
 int main()
 {
@@ -61,19 +15,16 @@ int main()
 		if (n == 0 && k == 0)
 			break;
 
-		if (k <= n - k)
-		{
-			// combination
-			result.push(factorial());
-		}
-
-		else
-		{
+		if (k > n - k)
 			k = n - k;
-			// combination
-			result.push(factorial());
+
+		unsigned long long temp = 1; // nC0 = 1
+		for (int i = 1; i <= k; i++)
+		{
+			temp = temp * (n-i+1) / i;
 		}
 
+		result.push(temp);
 	}
 
 	while (!result.empty())
