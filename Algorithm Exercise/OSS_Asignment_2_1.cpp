@@ -233,9 +233,33 @@ int main()
 		}
 	}
 
-	cout << "Year :" << date.year << endl;
-	cout << "Month :" << date.month << endl;
-	cout << "Day :" << date.day << endl;
+
+	// for print
+	std::string day;
+	std::string month;
+	
+	if (date.day < 10)
+	{
+		day = "0" + to_string(date.day);
+	}
+
+	else
+	{
+		day = to_string(date.day);
+	}
+
+	if (date.month < 10)
+	{
+		month = "0" + to_string(date.month);
+	}
+
+	else
+	{
+		month = to_string(date.month);
+	}
+
+	cout << date.year << "/" << month << "/"<< day << endl;
+	
 
 	return 0;
 }
